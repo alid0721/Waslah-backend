@@ -1,9 +1,10 @@
 const User = require("../models/User")
-
 const router = require("express").Router()
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const verifyToken = require("../middleware/verify-token")
+const upload = require("../middleware/file-handler")
+
 
 router.post("/sign-up",async(req,res)=>{
     try{
@@ -14,7 +15,13 @@ router.post("/sign-up",async(req,res)=>{
         }
         const createdUser = await User.create({
             username:req.body.username,
-            hashedPassword: bcrypt.hashSync(req.body.password,12)
+            hashedPassword: bcrypt.hashSync(req.body.password,12),
+            email:req.body.email,
+            phone:req.body.phone,
+            experience:req.body.experience,
+            type:req.body.type,
+            degree:req.body.degree,
+            age:req.body.age
         })
         console.log(createdUser)
 
