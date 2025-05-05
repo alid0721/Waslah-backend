@@ -35,3 +35,5 @@ const JobOfferSchema = new Schema({
         required: true,
     },
 });
+const JobOffer = model('JobOffer', JobOfferSchema);
+module.exports = JobOffer;
