@@ -3,7 +3,7 @@ const {Schema, model} = require("mongoose")
 const userSchema = new Schema({
     username: {
         type: String,
-        required:[true,"Email is Required"],
+        required:[true,"Username is Required"],
         unique:true,
         lowercase:true,
         trim:true
@@ -29,24 +29,27 @@ const userSchema = new Schema({
     age:{
         type:Number,
         required:[true,"Age is Required"],
-        unique:true,
         lowercase:true,
         trim:true
     },
     experience:{
         type:String,
         required:[true,"Work Experience is Required"],
-        unique:true,
         lowercase:true,
         trim:true
     },
     degree:{
         type:String,
         required:[true,"Degree is Required"],
-        unique:true,
         lowercase:true,
         trim:true,
         default:"Bachelor's Degree"
+    },
+    type:{
+        type:String,
+        required:[true,"Type is Required"],
+        enum:["trainee","supervisor","proffessor"],
+        default:"applicant"
     },
 })
 
