@@ -1,16 +1,15 @@
 const {Schema, model} = require('mongoose');
-const { schema } = require('./User');
-const { default: Corporation } = require('./Corporation');
+
 const applicationSchema = new Schema({
     traineeName: {
-        type: schema.types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
+        required: [true,"trainee name is required"],
     },
     jobOfferId: {
-        type: schema.types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'JobOffer',
-        required: true,
+        required: [true,'job offer id is required'],
     },
     applicationDate: {
         type: Date,
@@ -25,10 +24,10 @@ const applicationSchema = new Schema({
         //the name of the corporation that created the job offer obtained from the corporation model
         type: Schema.Types.ObjectId,
         ref: 'Corporation',
-        required: true,
+        required: false,
     },
 
-})
+},{ timestamps: true });
 
 const Application = model('Application', applicationSchema);
 module.exports = Application;

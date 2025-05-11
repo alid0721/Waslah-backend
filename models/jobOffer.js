@@ -32,6 +32,13 @@ const JobOfferSchema = new Schema({
         type: Date,
         required: true,
     },
-});
+    applications: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Application',
+        },
+    ],
+}, { timestamps: true });
+
 const JobOffer = model('JobOffer', JobOfferSchema);
 module.exports = JobOffer;
