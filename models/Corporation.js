@@ -18,4 +18,4 @@ const CorporationSchema = new Schema({
 }),
 Corporation = model('Corporation', CorporationSchema);
 
-export default Corporation;
+module.exports = Corporation;

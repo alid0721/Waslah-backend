@@ -48,10 +48,14 @@ const userSchema = new Schema({
     type:{
         type:String,
         required:[true,"Type is Required"],
-        enum:["trainee","supervisor","proffessor"],
+        enum:["trainee","supervisor","proffessor","student"],
         default:"applicant"
     },
-})
+    cv:{
+        type:String,
+    }
+
+},{ timestamps: true })
 
 const User = model("User",userSchema)
 
