@@ -11,6 +11,8 @@ const verifyToken = require("./middleware/verify-token")
 const jobOfferRouter = require("./controllers/jobOffer.route")
 const applicationRouter = require("./controllers/application.route")
 const evaluationRouter = require("./controllers/evaluation.route")
+const deliverableRouter = require("./controllers/deliverable.route")
+const messageRouter = require("./controllers/message.route")
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
@@ -31,6 +33,10 @@ app.use("/job-offer",jobOfferRouter)
 app.use("/application",applicationRouter)
 
 app.use("/evaluation",evaluationRouter)
+
+app.use("/deliverable",deliverableRouter)
+
+app.use("/message",messageRouter)
 app.listen(3000, () => {
   console.log('The express app is ready!');
 });

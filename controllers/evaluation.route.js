@@ -46,4 +46,17 @@ router.post('/:offerId/evaluations', verifyToken,async (req, res) => {
     }
 })
 
+router.get('/trainee/evaluations', verifyToken, async (req, res) => {
+    try {
+        const evaluations = await Evaluation.find({ applicantId: req.user._id }).populate('jobOfferId');
+        if (!evaluations) {
+            return res.status(404).json({ message: 'No evaluations found for this trainee' });
+        }
+        res.status(200).json(evaluations);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving evaluations', error });
+    }
+});
+
+
 module.exports = router;
