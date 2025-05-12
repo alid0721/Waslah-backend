@@ -96,4 +96,17 @@ router.put('/:offerId/applications/:applicationId', verifyToken, async (req, res
         res.status(500).json({ message: 'Error updating application', error });
     }
 });
+// retrieve all applications for a specific user
+router.get('/', verifyToken, async (req, res) => {
+    try {
+        const applications = await Application.find({ traineeName: req.user._id }).populate('jobOfferId');
+        if (!applications) {
+            return res.status(404).json({ message: 'No applications found' });
+        }
+        res.status(200).json(applications); // Return the applications
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).json({ message: 'Error retrieving applications', error });
+    }
+});
 module.exports = router;
