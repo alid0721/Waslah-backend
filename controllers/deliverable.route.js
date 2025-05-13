@@ -42,5 +42,43 @@ router.put('/:userId/:deliverableId', verifyToken, async (req, res) => {
     }
 });
 
+router.get('/task/',verifyToken, async (req,res)=>{
+    try {
+        const tasks=await Task.find({trainee:req.user._id}).populate('trainee').populate('supervisor');
+        if (!tasks) {
+            return res.status(404).json({ message: 'No tasks found for this trainee' });
+        }
+        res.status(200).json(tasks);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving tasks', error });
+    }
+})
+
+router.post('/task/:traineeId',verifyToken, async (req,res)=>{
+    try {
+        req.body.trainee=req.params.traineeId; // Set the trainee ID to the current user
+        req.body.supervisor=req.user._id; // Set the supervisor ID to the current user
+        const newTask=await Task.create(req.body);
+        console.log(newTask);
+        res.status(201).json(newTask);
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating task', error });
+    }
+})
+router.put('/task/:taskId',verifyToken, async (req,res)=>{
+    try {
+        const task=await Task.findById(req.params.taskId);
+        if (!task) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
+        if (!task.supervisor.equals(req.user._id)) {
+            return res.status(403).json({ message: 'Unauthorized to edit this task' });
+        }
+        const updatedTask=await Task.findByIdAndUpdate(req.params.taskId,req.body,{new:true});
+        res.status(200).json(updatedTask);
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating task', error });
+    }
+})
 
 module.exports = router;
