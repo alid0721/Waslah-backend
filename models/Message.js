@@ -23,3 +23,5 @@ const MessageSchema = new Schema({
         default: Date.now,
     },
 }, { timestamps: true });
+const Message = model('Message', MessageSchema);
+module.exports = Message;

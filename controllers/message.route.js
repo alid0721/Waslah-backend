@@ -5,7 +5,8 @@ const User = require('../models/User');
 
 router.get('/:userId/', verifyToken, async (req, res) => {
     try {
-        const messages = await message.find({ receiverId: req.params.userId }).populate('senderId');
+        const messages = await message.find({ receiver: req.params.userId }).populate('sender');
+        console.log(messages);
         if (!messages) {
             return res.status(404).json({ message: 'No messages found for this user' });
         }
@@ -16,8 +17,8 @@ router.get('/:userId/', verifyToken, async (req, res) => {
 });
 router.post('/:receiverId/', verifyToken, async (req, res) => {
     try {
-        req.body.senderId = req.user._id; // Set the sender ID to the current user
-        req.body.receiverId = req.params.receiverId; // Set the receiver ID to the current user
+        req.body.sender = req.user._id; // Set the sender ID to the current user
+        req.body.receiver = req.params.receiverId; // Set the receiver ID to the current user
         const newMessage = await message.create(req.body);
         console.log(newMessage);
         res.status(201).json(newMessage);
