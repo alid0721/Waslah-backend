@@ -15,7 +15,7 @@ const CorporationSchema = new Schema({
         required: true,
         unique: true,
     }
-}),
-Corporation = model('Corporation', CorporationSchema);
+});
+const Corporation = model('Corporation', CorporationSchema);
 
 module.exports = Corporation;

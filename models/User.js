@@ -50,7 +50,7 @@ const userSchema = new Schema({
         type:String,
         required:[true,"Type is Required"],
         enum:["trainee","supervisor","proffessor","student"],
-        default:"applicant"
+        default:"student"
     },
     cv:{
         type:String,
