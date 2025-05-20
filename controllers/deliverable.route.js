@@ -26,6 +26,18 @@ router.post('/:userId/', verifyToken, async (req, res) => {
     }
 });
 
+router.get('/:userId/:deliverableId', verifyToken, async (req, res) => {
+    try {
+        const deliverable = await Deliverable.findById(req.params.deliverableId).populate('traineeId');
+        if (!deliverable) {
+            return res.status(404).json({ message: 'Deliverable not found' });
+        }
+        res.status(200).json(deliverable);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving deliverable', error });
+    }
+});
+
 router.put('/:userId/:deliverableId', verifyToken, async (req, res) => {
     try {
         const deliverable = await Deliverable.findById(req.params.deliverableId);
