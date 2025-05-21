@@ -15,8 +15,10 @@ const JobOfferSchema = new Schema({
     },
     CorporationName:{
         //the name of the corporation that created the job offer obtained from the corporation model
-        type: Schema.Types.ObjectId,
-        ref: 'Corporation',
+        // type: Schema.Types.ObjectId,
+        // ref: 'Corporation',
+        type: String,
+        required: true,
     },
     superVisor:{
         //the name of the supervisor that created the job offer obtained from the user model

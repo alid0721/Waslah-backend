@@ -1,21 +1,21 @@
-const {Schema, model} = require('mongoose');
+// const {Schema, model} = require('mongoose');
 
-const CorporationSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    industry: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    }
-});
-const Corporation = model('Corporation', CorporationSchema);
+// const CorporationSchema = new Schema({
+//     name: {
+//         type: String,
+//         required: true,
+//         unique: true,
+//     },
+//     industry: {
+//         type: String,
+//         required: true,
+//     },
+//     email: {
+//         type: String,
+//         required: true,
+//         unique: true,
+//     }
+// });
+// const Corporation = model('Corporation', CorporationSchema);
 
-module.exports = Corporation;
+// module.exports = Corporation;

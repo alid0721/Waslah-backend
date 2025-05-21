@@ -20,12 +20,12 @@ const applicationSchema = new Schema({
         enum: ['pending', 'accepted', 'rejected'],
         default: 'pending',
     },
-    Corporation:{
-        //the name of the corporation that created the job offer obtained from the corporation model
-        type: Schema.Types.ObjectId,
-        ref: 'Corporation',
-        required: false,
-    },
+    // Corporation:{
+    //     //the name of the corporation that created the job offer obtained from the corporation model
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Corporation',
+    //     required: false,
+    // },
 
 },{ timestamps: true });
 
