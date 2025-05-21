@@ -21,7 +21,8 @@ router.post("/sign-up",async(req,res)=>{
             experience:req.body.experience,
             type:req.body.type,
             degree:req.body.degree,
-            age:req.body.age
+            age:req.body.age,
+            cv:req.body.cv,
         })
         console.log(createdUser)
 

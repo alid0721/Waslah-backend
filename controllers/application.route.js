@@ -7,7 +7,7 @@ const User = require('../models/User.js');
 
 
 //Retrieve all applications for a specific job offer
-router.get('/:offerId/applications', verifyToken, async (req, res) => {
+router.get('/:offerId', verifyToken, async (req, res) => {
     try {
         const jobOffer = await JobOffer.findById(req.params.offerId).populate('applications');
         if (!jobOffer) {
@@ -19,7 +19,7 @@ router.get('/:offerId/applications', verifyToken, async (req, res) => {
     }
 });
 // Retrieve a specific application by ID
-router.get('/:offerId/applications/:applicationId', verifyToken, async (req, res) => {
+router.get('/:offerId/:applicationId', verifyToken, async (req, res) => {
     try {
         // const jobOffer = await JobOffer.findById(req.params.offerId).populate('applications');
         // if (!jobOffer) {
@@ -40,7 +40,7 @@ router.get('/:offerId/applications/:applicationId', verifyToken, async (req, res
     }
 });
 // Create a new application for a specific job offer
-router.post('/:offerId/applications', verifyToken, async (req, res) => {
+router.post('/:offerId', verifyToken, async (req, res) => {
     try {
         const jobOffer = await JobOffer.findById(req.params.offerId);
         if (!jobOffer) {
@@ -70,7 +70,7 @@ router.post('/:offerId/applications', verifyToken, async (req, res) => {
 });
 
 // allow the supervisor to accept or reject the application
-router.put('/:offerId/applications/:applicationId', verifyToken, async (req, res) => {
+router.put('/:offerId/:applicationId', verifyToken, async (req, res) => {
     try {
         const jobOffer = await JobOffer.findById(req.params.offerId);
         if (!jobOffer) {
